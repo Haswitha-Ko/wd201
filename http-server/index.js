@@ -1,31 +1,31 @@
 const http=require("http");
-const f=require("f");
+const fs=require("fs");
 const arg=require("minimist")(process.argv.slice(2));
 let ho_Content="";
 let proj_Content="";
 let regis_Content="";
-f.readFile("home.html",(err,home)=>{
+fs.readFile("home.html",(err,home)=>{
   if (err) {
     throw err;
   }
   ho_Content=home;
 });
-f.readFile("project.html",(err,project)=>{
+fs.readFile("project.html",(err,project)=>{
   if (err) {
     throw err;
   }
   proj_Content=project;
 });
-f.readFile("registration.html",(err,registration)=>{
+fs.readFile("registration.html",(err,registration)=>{
   if (err) {
     throw err;
   }
   regis_Content=registration;
 });
-f.readFile("home.html",(err,home)=>{
+fs.readFile("home.html",(err,home)=>{
   console.log(home.toString());
 });
-f.readFile("home.html",(err,home)=>{
+fs.readFile("home.html",(err,home)=>{
   if (err){
     throw err;
   }
