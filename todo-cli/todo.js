@@ -24,7 +24,7 @@ const todoList = () => {
     // as per the format given above.
     return list.map((i) => {
       const cb = i.completed ? '[x]' : '[ ]';
-      const dp = new Date(i.dueDate).toDateString()=== new Date().toDateString() ? '' : `${formattedDate(new Date(i.dueDate))}`;
+      const dp = new Date(i.dueDate).toDateString()=== new Date().toDateString() ? '' : ` ${formattedDate(new Date(i.dueDate))}`;
       return `${cb} ${i.title}${dp}`;
     }).join('\n');
   }
