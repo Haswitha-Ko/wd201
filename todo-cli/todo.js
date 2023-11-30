@@ -23,10 +23,10 @@ const todoList = () => {
     // Format the To-Do list here, and return the output string
     // as per the format given above.
     return list.map((i) => {
-      const cb= i.completed ? '[x]' : '[ ]';
-      const dp= new Date(i.dueDate).toDateString()=== new Date().toDateString() ? '' : `${formattedDate(new Date(i.dueDate))}`;
+      const cb = i.completed ? '[x]' : '[ ]';
+      const dp = new Date(i.dueDate).toDateString()=== new Date().toDateString() ? '' : `${formattedDate(new Date(i.dueDate))}`;
       return `${cb} ${i.title}${dp}`;
-    }).join('\n);
+    }).join('\n');
   }
    const formattedDate = (d) => {
      return d.toISOString().split("T")[0];
