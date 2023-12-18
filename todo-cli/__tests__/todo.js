@@ -23,7 +23,7 @@ describe("Todo List Test Suite", () => {
       {
         title: "Submit PR",
         completed: false,
-        dueDate: new Date(to_day.getTime() + 2 * day_).toLocaleDateString(
+        dueDate: new Date(to_day.getTime() + 2 * d_ay).toLocaleDateString(
           "en-CA"
         ),
       },
