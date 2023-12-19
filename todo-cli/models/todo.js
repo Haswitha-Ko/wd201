@@ -82,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
       const checkbox = this.completed ? "[x]" : "[ ]";
       let due_Date_String="";
 
-      const today = new Date();
+      const today = new Date(this.today);
       today.setHours(0, 0, 0, 0);
 
       const dueDate = new Date(this.dueDate);
