@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model, Op } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
     static async addTask(params) {
@@ -82,30 +80,34 @@ module.exports = (sequelize, DataTypes) => {
 
     displayableString() {
       const checkbox = this.completed ? "[x]" : "[ ]";
-      let due_Date_String="";
+      let dueDateString="";
 
-      const to_day = new Date();
+      const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      const due_Date = new Date(this.dueDate);
+      const duedate = new Date(this.dueDate);
       dueDate.setHours(0, 0, 0, 0);
 
-      if (this.completed || due_Date > to_day) {
-        due_Date_String = due_Date.toISOString().slice(0, 10);
+      if (this.completed || dueDate > today) {
+        dueDateString = dueDate.toISOString().slice(0, 10);
       }
 
-      return `${this.id}. ${checkbox} ${this.title} ${due_Date_String}`;
+      return `${this.id}. ${checkbox} ${this.title} ${dueDateString}`;
     }
+    
     static associate(models) {
     }
   }
-  Todo.init({
-    title: DataTypes.STRING,
-    dueDate: DataTypes.DATEONLY,
-    completed: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'Todo',
-  });
+  Todo.init(
+    {
+      title: DataTypes.STRING,
+      dueDate: DataTypes.DATEONLY,
+      completed: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: "Todo",
+    }
+  );
   return Todo;
 };
