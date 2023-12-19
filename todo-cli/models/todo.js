@@ -80,19 +80,19 @@ module.exports = (sequelize, DataTypes) => {
 
     displayableString() {
       const checkbox = this.completed ? "[x]" : "[ ]";
-      let dueDateString="";
+      let due_Date_String="";
 
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      const duedate = new Date(this.dueDate);
+      const dueDate = new Date(this.dueDate);
       dueDate.setHours(0, 0, 0, 0);
 
       if (this.completed || dueDate > today) {
-        dueDateString = dueDate.toISOString().slice(0, 10);
+        due_Date_String = dueDate.toISOString().slice(0, 10);
       }
 
-      return `${this.id}. ${checkbox} ${this.title} ${dueDateString}`;
+      return `${this.id}. ${checkbox} ${this.title} ${due_Date_String}`;
     }
     
     static associate(models) {
