@@ -88,6 +88,10 @@ module.exports = (sequelize, DataTypes) => {
       const dueDate = new Date(this.dueDate);
       dueDate.setHours(0, 0, 0, 0);
 
+      if (!this.completed && dueDate.getTime() === today.getTime()) {
+             return `${this.id}. ${checkbox} ${this.title}`;
+      }
+
       if (this.completed && dueDate.getTime() === today.getTime()) {
          return `${this.id}. ${checkbox} ${this.title}`;
       }
