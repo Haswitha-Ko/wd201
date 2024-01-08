@@ -8,18 +8,10 @@ app.get("/", function (request, response) {
   response.send("Hello World");
 });
 
-app.delete("/todos/:id", async function (request, response) {
+app.get("/todos", async function (_request, response) {
   try {
-    const deletedTodoCount = await Todo.destroy({
-      where: { id: request.params.id }, // Specify the Todo to delete by ID
-    });
-
-    // Respond based on whether the Todo was deleted or not
-    if (deletedTodoCount > 0) {
-      return response.send(true); // Todo was deleted
-    } else {
-      return response.send(false); // Todo with the given ID was not found
-    }
+    const todos = await Todo.findAll(); // Retrieve all Todos from the database
+    return response.json(todos); // Respond with all Todos
   } catch (error) {
     console.log(error);
     return response.status(422).json(error);
@@ -58,12 +50,22 @@ app.put("/todos/:id/markAsCompleted", async function (request, response) {
 });
 
 app.delete("/todos/:id", async function (request, response) {
-  console.log("We have to delete a Todo with ID: ", request.params.id);
-  // FILL IN YOUR CODE HERE
+  try {
+    const deletedTodoCount = await Todo.destroy({
+      where: { id: request.params.id }, // Specify the Todo to delete by ID
+    });
 
-  // First, we have to query our database to delete a Todo by ID.
-  // Then, we have to respond back with true/false based on whether the Todo was deleted or not.
-  // response.send(true)
+    // Respond based on whether the Todo was deleted or not
+    if (deletedTodoCount > 0) {
+      return response.send(true); // Todo was deleted
+    } else {
+      return response.send(false); // Todo with the given ID was not found
+    }
+  } catch (error) {
+    console.log(error);
+    return response.status(422).json(error);
+  }
 });
+
 
 module.exports = app;
