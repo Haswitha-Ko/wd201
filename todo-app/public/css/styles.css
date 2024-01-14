@@ -2,6 +2,22 @@ body{
     background-color: #cbc3e3;
     color: black;
     font-family: Arial, Helvetica, sans-serif;}
-.Todo-Item:hover .trash-icon{
-    display: block;
+
+
+.Todo-Item .trash-icon {
+    display: none;
+}
+.Todo-Item:hover .trash-icon {
+    display: inline-block;
+}
+
+.trash-icon svg {
+    width: 1rem; /* Adjust the size as needed */
+    height: 1rem;
+}
+
+
+
+.flex-container {
+    display: flex;
 }
