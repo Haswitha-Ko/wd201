@@ -7,8 +7,14 @@
     <title>To-Do List Manager</title><br>
 </head>
 <body>
-    <%- include('header.ejs') %>
-    <%- include('todos.ejs') %>
-    <%- include('footer.ejs') %>
+  <div class="grid grid-cols-4">
+     <div class="col-start-2 col-span-2">
+        <%- include('header.ejs') %>
+        <br>
+        <%- include('todos.ejs') %>
+        <br>
+        <%- include('footer.ejs') %>
+      </div>
+  </div>
 </body>
 </html>
