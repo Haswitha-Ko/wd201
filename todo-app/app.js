@@ -72,7 +72,7 @@ app.get("/todos/:id", async function (request, response) {
   }
 });
 
-app.post("/todos", async (request, response) {
+app.post("/todos", async (request, response)) {
   try {
     await Todo.addTodo({
       title: request.body.title,
