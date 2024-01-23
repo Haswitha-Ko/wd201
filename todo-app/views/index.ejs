@@ -4,15 +4,66 @@
     <link href="./css/styles.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<%= csrfToken %>" >
     <title>To-Do List Manager</title><br>
+    <script>
+        var token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+        function updateTodo(id,iscompleted) {
+            fetch(`/todos/${id}`, {
+                method: "put",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    completed: iscompleted,
+                    "_csrf": token
+                })
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        window.location.reload();
+                    }
+                })
+                .catch((err) => console.error(err));
+        }
+        function deleteTodo(id) {
+            fetch(`/todos/${id}`, {
+                method: "delete",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    "_csrf": token
+                })
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        window.location.reload();
+                    }
+                })
+                .catch((err) => console.error(err));
+        }
+    </script>
 </head>
 <body>
   <div class="grid grid-cols-4">
      <div class="col-start-2 col-span-2">
         <%- include('header.ejs') %>
         <br>
-        <%- include('todos.ejs') %>
+        <form class="flex-container">
+            <div class="flex-auto">
+                <input type="text" placeholder="What's Next?" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm h-10" required>
+            </div>
+            <div class="flex-auto ml-2">
+                <input type="date" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm h-10" required>
+            </div>
+            <div class="flex-auto ml-2">
+                <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded h-10">Add</button>
+            </div>
+        </form>
         <br>
+        <%- include('todo.ejs', {title: "Overdue" , data: overdue, id: "count-overdue"}) %>
+        <%- include('todo.ejs', {title: "Due Today" , data: dueToday, id: "count-due-today"}) %>
+        <%- include('todo.ejs', {title: "Due Later" , data: dueLater, id: "count-due-later"}) %>
+        <%- include('todo.ejs', {title: "Completed Items" , data: completed, id: "count-completed"}) %>
         <%- include('footer.ejs') %>
       </div>
   </div>
